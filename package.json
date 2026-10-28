@@ -9,6 +9,9 @@
     "db:reset": "node -e \"require('./db.js').initDatabase(true); console.log('Database reset to fresh sample data.');\"",
     "test": "node test_suite.js"
   },
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "keywords": [
     "blood-bank",
     "healthcare",

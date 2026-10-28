@@ -29,15 +29,19 @@ const SCHEMA_PATH = path.join(__dirname, '..', '..', 'schema.sql');
 
 function initSqlite() {
     if (!sqliteDb) {
-        const { DatabaseSync } = require('node:sqlite');
-        sqliteDb = new DatabaseSync(DB_PATH);
-        sqliteDb.exec('PRAGMA foreign_keys = ON;');
-        
-        // Seed if needed
-        const tables = sqliteDb.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='Donors'").all();
-        if (tables.length === 0) {
-            const schemaSql = fs.readFileSync(SCHEMA_PATH, 'utf-8');
-            sqliteDb.exec(schemaSql);
+        try {
+            const { DatabaseSync } = require('node:sqlite');
+            sqliteDb = new DatabaseSync(DB_PATH);
+            sqliteDb.exec('PRAGMA foreign_keys = ON;');
+            
+            // Seed if needed
+            const tables = sqliteDb.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='Donors'").all();
+            if (tables.length === 0) {
+                const schemaSql = fs.readFileSync(SCHEMA_PATH, 'utf-8');
+                sqliteDb.exec(schemaSql);
+            }
+        } catch (err) {
+            console.warn('[Database] SQLite DatabaseSync fallback notice:', err.message);
         }
     }
 }
