@@ -1,0 +1,24 @@
+{
+  "name": "blood-bank-management-system",
+  "version": "1.0.0",
+  "description": "A complete, functional and visually polished Blood Bank Management System with full Relational Database and Responsive UI for college project evaluation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "db:view": "node view_db.js",
+    "db:reset": "node -e \"require('./db.js').initDatabase(true); console.log('Database reset to fresh sample data.');\"",
+    "test": "node test_suite.js"
+  },
+  "keywords": [
+    "blood-bank",
+    "healthcare",
+    "relational-database",
+    "sqlite",
+    "college-project"
+  ],
+  "author": "Aditya Dube",
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^3.24.6"
+  }
+}
